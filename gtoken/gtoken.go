@@ -58,12 +58,16 @@ type GfToken struct {
 
 	// 登录路径
 	LoginPath string
+	// 登录路径请求方法 如果没有设置则默认为ALL
+	LoginPathMethod string
 	// 登录验证方法 return userKey 用户标识 如果userKey为空，结束执行
 	LoginBeforeFunc func(r *ghttp.Request) (string, interface{})
 	// 登录返回方法
 	LoginAfterFunc func(r *ghttp.Request, respData Resp)
 	// 登出地址
 	LogoutPath string
+	// 登出路径请求方法 如果没有设置则默认为ALL
+	LogoutPathMethod string
 	// 登出验证方法 return true 继续执行，否则结束执行
 	LogoutBeforeFunc func(r *ghttp.Request) bool
 	// 登出返回方法

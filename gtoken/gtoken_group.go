@@ -33,8 +33,22 @@ func (m *GfToken) Middleware(group *ghttp.RouterGroup) error {
 	}
 
 	group.Middleware(m.authMiddleware)
-	group.ALL(m.LoginPath, m.Login)
-	group.ALL(m.LogoutPath, m.Logout)
+	switch m.LoginPathMethod {
+	case "GET":
+		group.GET(m.LoginPath, m.Login)
+	case "POST":
+		group.POST(m.LoginPath, m.Login)
+	default:
+		group.ALL(m.LoginPath, m.Login)
+	}
+	switch m.LogoutPathMethod {
+	case "GET":
+		group.GET(m.LogoutPath, m.Logout)
+	case "POST":
+		group.POST(m.LogoutPath, m.Logout)
+	default:
+		group.ALL(m.LogoutPath, m.Logout)
+	}
 
 	return nil
 }
